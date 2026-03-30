@@ -7,17 +7,25 @@ def add_numbers():
     """
     Add two numbers and return the result.
     
-    GET: /add?a=5&b=7
-    POST: {"a": 5, "b": 7}
+    GET: /add?a=5&b=3
+    POST: {"a": 5, "b": 3}
     """
     try:
         if request.method == 'POST':
-            data = request.get_json()
-            a = float(data.get('a'))
-            b = float(data.get('b'))
+            data = request.get_json(silent=True)
+            if data is None:
+                return jsonify({'error': 'Request body must be JSON.'}), 400
+            a = data.get('a')
+            b = data.get('b')
         else:  # GET request
-            a = float(request.args.get('a'))
-            b = float(request.args.get('b'))
+            a = request.args.get('a')
+            b = request.args.get('b')
+        
+        if a is None or b is None:
+            return jsonify({'error': 'Missing required parameters: a and b.'}), 400
+        
+        a = float(a)
+        b = float(b)
         
         result = a + b
         return jsonify({
@@ -35,8 +43,8 @@ def home():
     return jsonify({
         'message': 'Adder Service',
         'usage': {
-            'GET': '/add?a=5&b=7',
-            'POST': '/add with JSON body {"a": 5, "b": 7}'
+            'GET': '/add?a=5&b=3',
+            'POST': '/add with JSON body {"a": 5, "b": 3}'
         }
     })
 
