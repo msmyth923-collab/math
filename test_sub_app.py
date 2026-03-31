@@ -1,5 +1,5 @@
 import unittest
-from sub_app import app
+from app import app
 
 class TestSubtractor(unittest.TestCase):
     def setUp(self):
@@ -50,7 +50,7 @@ class TestSubtractor(unittest.TestCase):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
         data = response.get_json()
-        self.assertEqual(data['message'], 'Subtractor Service')
+        self.assertEqual(data['message'], 'Math Service')
         self.assertIn('usage', data)
 
 if __name__ == '__main__':

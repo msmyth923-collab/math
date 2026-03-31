@@ -41,7 +41,7 @@ def add_numbers():
 @app.route('/', methods=['GET'])
 def home():
     return jsonify({
-        'message': 'Math Services',
+        'message': 'Math Service',
         'usage': {
             'Add': {'GET': '/add?a=5&b=3', 'POST': '/add with JSON {"a": 5, "b": 3}'},
             'Subtract': {'GET': '/subtract?a=5&b=3', 'POST': '/subtract with JSON {"a": 5, "b": 3}'}
