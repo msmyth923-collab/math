@@ -93,7 +93,7 @@ class TestAdder(unittest.TestCase):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
         data = response.get_json()
-        self.assertEqual(data['message'], 'Adder Service')
+        self.assertEqual(data['message'], 'Math Service')
         self.assertIn('usage', data)
 
 if __name__ == '__main__':
